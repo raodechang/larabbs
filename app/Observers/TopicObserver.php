@@ -38,5 +38,12 @@ class TopicObserver
         //
     }
 
-
+    /**
+     * @如果删除帖子，同时会删除帖子下的所有回复
+     * @param Topic $topic
+     */
+    public function deleted(Topic $topic)
+    {
+        \DB::table('replies')->where('topic_id', $topic->id)->delete();
+    }
 }
